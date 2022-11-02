@@ -18,6 +18,7 @@ type ZRpcContext struct {
 	GoOutput        string
 	GrpcOutput      string
 	Output          string
+	ZRpcClientDir   string
 }
 
 // Generate generates an rpc service, through the proto file,

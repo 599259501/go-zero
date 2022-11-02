@@ -59,20 +59,21 @@ func mkdir(ctx *ctx.ProjectContext, proto parser.Proto, _ *conf.Config, c *ZRpcC
 	inner := make(map[string]Dir)
 	etcDir := filepath.Join(ctx.WorkDir, "etc")
 	internalDir := filepath.Join(ctx.WorkDir, "internal")
+	pbDir := filepath.Join(ctx.WorkDir, proto.GoPackage)
 	configDir := filepath.Join(internalDir, "config")
-	logicDir := filepath.Join(internalDir, "logic")
+	logicDir := filepath.Join(internalDir, "logic", strings.ToLower(stringx.From(proto.Service.Name).ToCamel()))
 	serverDir := filepath.Join(internalDir, "server")
 	svcDir := filepath.Join(internalDir, "svc")
-	pbDir := filepath.Join(ctx.WorkDir, proto.GoPackage)
+	zrpcClientDir := filepath.Join(ctx.WorkDir, c.ZRpcClientDir)
 	protoGoDir := pbDir
 	if c != nil {
 		pbDir = c.ProtoGenGrpcDir
 		protoGoDir = c.ProtoGenGoDir
 	}
 
-	callDir := filepath.Join(ctx.WorkDir, strings.ToLower(stringx.From(proto.Service.Name).ToCamel()))
+	callDir := filepath.Join(ctx.WorkDir, zrpcClientDir, strings.ToLower(stringx.From(proto.Service.Name).ToCamel()))
 	if strings.EqualFold(proto.Service.Name, proto.GoPackage) {
-		callDir = filepath.Join(ctx.WorkDir, strings.ToLower(stringx.From(proto.Service.Name+"_client").ToCamel()))
+		callDir = filepath.Join(ctx.WorkDir, zrpcClientDir, strings.ToLower(stringx.From(proto.Service.Name+"_client").ToCamel()))
 	}
 
 	inner[wd] = Dir{

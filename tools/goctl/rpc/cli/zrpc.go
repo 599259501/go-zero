@@ -36,6 +36,7 @@ func ZRPC(_ *cobra.Command, args []string) error {
 	remote := VarStringRemote
 	branch := VarStringBranch
 	verbose := VarBoolVerbose
+	zrpcClientOut := VarStringZRpcClientOut
 	if len(grpcOutList) == 0 {
 		return errInvalidGrpcOutput
 	}
@@ -63,6 +64,10 @@ func ZRPC(_ *cobra.Command, args []string) error {
 		return err
 	}
 	err = pathx.MkdirIfNotExist(grpcOutAbs)
+	if err != nil {
+		return err
+	}
+	err = pathx.MkdirIfNotExist(zrpcClientOut)
 	if err != nil {
 		return err
 	}
@@ -100,6 +105,8 @@ func ZRPC(_ *cobra.Command, args []string) error {
 	ctx.GrpcOutput = grpcOut
 	ctx.IsGooglePlugin = isGooglePlugin
 	ctx.Output = zrpcOut
+	// 增加zrpc_client生成的
+	ctx.ZRpcClientDir = zrpcClientOut
 	ctx.ProtocCmd = strings.Join(protocArgs, " ")
 	g := generator.NewGenerator(style, verbose)
 	return g.Generate(&ctx)

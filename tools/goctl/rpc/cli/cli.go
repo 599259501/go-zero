@@ -42,6 +42,8 @@ var (
 	VarBoolIdea bool
 	// VarBoolVerbose describes whether verbose.
 	VarBoolVerbose bool
+	// VarStringZRpcClientOut zrpcclient生成目录路径
+	VarStringZRpcClientOut string
 )
 
 // RPCNew is to generate rpc greet service, this greet service can speed

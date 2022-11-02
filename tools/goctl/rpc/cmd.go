@@ -78,6 +78,7 @@ func init() {
 	protocCmd.Flags().MarkHidden("go-grpc_opt")
 	protocCmd.Flags().MarkHidden("plugin")
 	protocCmd.Flags().MarkHidden("proto_path")
+	protocCmd.Flags().StringVar(&cli.VarStringZRpcClientOut, "zrpc_client_out", "zrpc_client", "rpc相关业务逻辑出现在相关结构上")
 
 	templateCmd.Flags().StringVar(&cli.VarStringOutput, "o", "", "Output a sample proto file")
 	templateCmd.Flags().StringVar(&cli.VarStringHome, "home", "", "The goctl home path of the template, --home and --remote cannot be set at the same time, if they are, --remote has higher priority")

@@ -84,6 +84,7 @@ func (p *DefaultProtoParser) Parse(src string) (Proto, error) {
 		return ret, errors.New("only one service expected")
 	}
 	service := serviceList[0]
+	// 这里是读取goctl protoc xxx.proto 的文件绝对路径
 	name := filepath.Base(abs)
 
 	for _, rpc := range service.RPC {

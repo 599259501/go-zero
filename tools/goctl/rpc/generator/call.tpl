@@ -15,7 +15,7 @@ import (
 type (
 	{{.alias}}
 
-	{{.serviceName}} interface {
+	I{{.ServiceName}} interface {
 		{{.interface}}
 	}
 
@@ -24,7 +24,7 @@ type (
 	}
 )
 
-func New{{.serviceName}}(cli zrpc.Client) {{.serviceName}} {
+func New{{.serviceName}}(cli zrpc.Client) I{{.ServiceName}} {
 	return &default{{.serviceName}}{
 		cli: cli,
 	}

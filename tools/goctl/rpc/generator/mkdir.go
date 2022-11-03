@@ -70,10 +70,13 @@ func mkdir(ctx *ctx.ProjectContext, proto parser.Proto, _ *conf.Config, c *ZRpcC
 		pbDir = c.ProtoGenGrpcDir
 		protoGoDir = c.ProtoGenGoDir
 	}
-
-	callDir := filepath.Join(ctx.WorkDir, zrpcClientDir, strings.ToLower(stringx.From(proto.Service.Name).ToCamel()))
-	if strings.EqualFold(proto.Service.Name, proto.GoPackage) {
-		callDir = filepath.Join(ctx.WorkDir, zrpcClientDir, strings.ToLower(stringx.From(proto.Service.Name+"_client").ToCamel()))
+	// 如果存在zrpcClientDir，服务之间就不再创建一个单独的服务名称了
+	callDir := zrpcClientDir
+	if len(c.ZRpcClientDir) <= 0 {
+		callDir = filepath.Join(zrpcClientDir, strings.ToLower(stringx.From(proto.Service.Name).ToCamel()))
+		if strings.EqualFold(proto.Service.Name, proto.GoPackage) {
+			callDir = filepath.Join(zrpcClientDir, strings.ToLower(stringx.From(proto.Service.Name+"_client").ToCamel()))
+		}
 	}
 
 	inner[wd] = Dir{

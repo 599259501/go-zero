@@ -50,9 +50,10 @@ func (g *Generator) GenLogic(ctx DirContext, proto parser.Proto, cfg *conf.Confi
 			return err
 		}
 		err = util.With("logic").GoFmt(true).Parse(text).SaveTo(map[string]interface{}{
-			"logicName": fmt.Sprintf("%sLogic", stringx.From(rpc.Name).ToCamel()),
-			"functions": functions,
-			"imports":   strings.Join(imports.KeysStr(), pathx.NL),
+			"logicName":   fmt.Sprintf("%sLogic", stringx.From(rpc.Name).ToCamel()),
+			"functions":   functions,
+			"imports":     strings.Join(imports.KeysStr(), pathx.NL),
+			"packageName": dir,
 		}, filename, false)
 		if err != nil {
 			return err

@@ -29,7 +29,7 @@ var serverTemplate string
 // GenServer generates rpc server file, which is an implementation of rpc server
 func (g *Generator) GenServer(ctx DirContext, proto parser.Proto, cfg *conf.Config) error {
 	dir := ctx.GetServer()
-	logicImport := fmt.Sprintf(`"logic %v"`, ctx.GetLogic().Package)
+	logicImport := fmt.Sprintf(`logic "%v"`, ctx.GetLogic().Package)
 	svcImport := fmt.Sprintf(`"%v"`, ctx.GetSvc().Package)
 	pbImport := fmt.Sprintf(`"%v"`, ctx.GetPb().Package)
 

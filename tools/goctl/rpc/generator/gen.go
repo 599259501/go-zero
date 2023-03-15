@@ -56,10 +56,11 @@ func (g *Generator) Generate(zctx *ZRpcContext) error {
 		return err
 	}
 
-	err = g.GenEtc(dirCtx, proto, g.cfg)
+	// todo 不生成配置文件
+	/*err = g.GenEtc(dirCtx, proto, g.cfg)
 	if err != nil {
 		return err
-	}
+	}*/
 
 	err = g.GenPb(dirCtx, zctx)
 	if err != nil {
@@ -86,10 +87,11 @@ func (g *Generator) Generate(zctx *ZRpcContext) error {
 		return err
 	}
 
-	err = g.GenMain(dirCtx, proto, g.cfg)
+	// todo 不生成main函数
+	/*err = g.GenMain(dirCtx, proto, g.cfg)
 	if err != nil {
 		return err
-	}
+	}*/
 
 	err = g.GenCall(dirCtx, proto, g.cfg)
 

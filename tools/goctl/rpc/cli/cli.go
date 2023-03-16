@@ -44,6 +44,8 @@ var (
 	VarBoolVerbose bool
 	// VarStringZRpcClientOut zrpcclient生成目录路径
 	VarStringZRpcClientOut string
+	// VarSharePbDir 是否共享pb服务目录
+	VarSharePbDir bool
 )
 
 // RPCNew is to generate rpc greet service, this greet service can speed

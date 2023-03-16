@@ -31,14 +31,21 @@ func (g *Generator) genPbDirect(ctx DirContext, c *ZRpcContext) error {
 }
 
 func (g *Generator) setPbDir(ctx DirContext, c *ZRpcContext) error {
-	pbDir, err := findPbFile(c.GoOutput, false)
+	pbDirPath := c.GoOutput
+	grpcDirPath := c.GoOutput
+	if !c.SharePbDir {
+		pbDirPath = filepath.Join(pbDirPath, ctx.GetServiceName().ToSnake())
+		grpcDirPath = filepath.Join(grpcDirPath, ctx.GetServiceName().ToSnake())
+	}
+
+	pbDir, err := findPbFile(pbDirPath, false)
 	if err != nil {
 		return err
 	}
 	if len(pbDir) == 0 {
 		return fmt.Errorf("pg.go is not found under %q", c.GoOutput)
 	}
-	grpcDir, err := findPbFile(c.GrpcOutput, true)
+	grpcDir, err := findPbFile(grpcDirPath, true)
 	if err != nil {
 		return err
 	}

@@ -19,6 +19,7 @@ type ZRpcContext struct {
 	GrpcOutput      string
 	Output          string
 	ZRpcClientDir   string
+	SharePbDir      bool
 }
 
 // Generate generates an rpc service, through the proto file,

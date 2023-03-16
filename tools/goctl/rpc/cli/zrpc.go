@@ -105,6 +105,7 @@ func ZRPC(_ *cobra.Command, args []string) error {
 	ctx.GrpcOutput = grpcOut
 	ctx.IsGooglePlugin = isGooglePlugin
 	ctx.Output = zrpcOut
+	ctx.SharePbDir = VarSharePbDir
 	// 增加zrpc_client生成的
 	ctx.ZRpcClientDir = zrpcClientOut
 	ctx.ProtocCmd = strings.Join(protocArgs, " ")
